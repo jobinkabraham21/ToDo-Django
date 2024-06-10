@@ -14,6 +14,7 @@ Home
             </div>
             <div class="col-md-12">
                 <form method="POST">
+                    {% csrf_token %}
                     <label for="title">Title*</label>
                     <input type="text" name="title" id="title" class="form-control mb-2"/>
                     <input type="submit" class="btn btn-dark btn-block" value="Submit"/>
@@ -21,17 +22,19 @@ Home
             </div>
             <div class="col-md-12 mt-3">
                 <div class="todo-list text-center">
-                    <div class="todo-content border border-dark p-2 mb-2 d-flex justify-content-between">
-                        <div>
-                            <span class="lead">Lorem ipsum dolor sit amet.</span>
+                    {% for todo in todos %}
+                        <div class="todo-content border border-dark p-2 mb-2 d-flex justify-content-between">
+                            <div>
+                                <span class="lead">{{ todo.title }}</span>
+                            </div>
+                            <div>
+                                <a href="#" class="btn btn-warning">Update</a>
+                                <form action="#" method="POST" class="d-inline-block">
+                                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                                </form>
+                            </div>
                         </div>
-                        <div>
-                            <a href="#" class="btn btn-warning">Update</a>
-                            <form action="#" method="POST" class="d-inline-block">
-                                <input type="submit" class="btn btn-danger" value="Delete"/>
-                            </form>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
